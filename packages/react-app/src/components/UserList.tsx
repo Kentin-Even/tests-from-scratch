@@ -1,11 +1,10 @@
-import React from "react";
 import { useUsers } from "../hooks/useUsers";
 
 export function UserList() {
   const { users, loading, error } = useUsers();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p role="status">Chargement...</p>;
+  if (error) return <p role="alert">Erreur : Erreur réseau</p>;
 
   return (
     <ul>

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { UserList } from "../components/UserList";
 import { server } from "../mocks/browser";
-import { http, HttpResponse } from "msw";
+import { rest } from "msw";
 describe("UserList Component", () => {
   it("affiche le loader puis la liste d utilisateurs", async () => {
     render(<UserList />);
@@ -16,8 +16,8 @@ describe("UserList Component", () => {
   it("affiche une erreur si l API échoue", async () => {
     // On override le handler pour renvoyer 500
     server.use(
-      http.get("/users", () => {
-        return HttpResponse.json({ status: 500, error: "Server Error" });
+      rest.get("/users", (_req, res, ctx) => {
+        return res(ctx.status(500), ctx.json({ error: "Server Error" }));
       })
     );
     render(<UserList />);
