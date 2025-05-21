@@ -23,6 +23,6 @@ describe("UserList Component", () => {
     render(<UserList />);
     // Attendre l’alerte d’erreur
     const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent("Erreur : Erreur réseau");
+    expect(alert).toHaveTextContent("Erreur : Network request failed");
   });
 });
